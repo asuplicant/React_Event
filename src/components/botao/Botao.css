@@ -4,7 +4,8 @@
     background-color:#b51d44 ;
     color:rgb(255, 255, 255) ;
     font-size: 18px;
-    border-radius: 6px;
+    border: none;
+    border-radius: 10px;
     transition:background-color 0.3s ease, transform 0.3s ease ;
 
 }
