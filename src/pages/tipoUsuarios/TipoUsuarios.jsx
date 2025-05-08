@@ -8,16 +8,15 @@ const TipoUsuarios = () => {
     return (
         <>
             <Header />
-            <main>
-                <Cadastro
-                    tituloCadastro = "Cadastro Tipo de Usuários"
-                    img_banner = {Banner}
-                    nomes = "Título"
-                    visibilidade = "none"
-                />
-            </main>
+            <Cadastro
+                tituloCadastro="Cadastro Tipo de Usuário"
+                img_banner={Banner}
+                nomes="Título"
+                visibilidade="none"
+                textoBotao="Cadastrar"
+            />
+            
             <Footer />
-
         </>
     )
 }

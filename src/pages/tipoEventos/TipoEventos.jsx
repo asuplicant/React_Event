@@ -3,21 +3,25 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Cadastro from "../../components/cadastro/Cadastro";
 import Banner from "../../assets/img/banner_tipo_eventos.svg";
+import Lista from "../../components/lista/Lista";
 
 const TipoEventos = () => {
     return (
         <>
             <Header />
-            <main>
                 <Cadastro
                     tituloCadastro = "Cadastro Tipo de Eventos"
                     img_banner = {Banner}
                     nomes = "Título"
                     visibilidade = "none"
                 />
-            </main>
-            <Footer />
+                   <Lista 
+                   tituloLista ="Lista Tipo de Evento"
+                   titulo = "Título"
+                   visibilidade ="none"
 
+                />
+                <Footer />
         </>
     )
 }

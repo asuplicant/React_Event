@@ -1,5 +1,5 @@
 import React from "react";
-import Rotas from "./Routes/routes"; // ajuste o caminho se necessário
+import Rotas from "./Routes/routes"; 
 
 function App() {
   return (
