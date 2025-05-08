@@ -58,11 +58,9 @@
     place-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px){
 
-    /*0px -> 768px*/
-    .banner  {
+    .banner_login{
         display: none;
     }
-    
-}
+ }

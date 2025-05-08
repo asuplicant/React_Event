@@ -16,7 +16,7 @@ const TipoEventos = () => {
                     visibilidade = "none"
                 />
                    <Lista 
-                   tituloLista ="Lista Tipo de Evento"
+                   tituloLista ="LISTA TIPO DE EVENTOS"
                    titulo = "Título"
                    visibilidade ="none"
 

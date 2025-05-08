@@ -16,7 +16,7 @@ const CadastroEventos = () => {
                 />
 
                 <Lista 
-                    tituloLista ="Lista de Evento"
+                    tituloLista ="LISTA DE EVENTO"
                     titulo = "Nome"
                 
                 />

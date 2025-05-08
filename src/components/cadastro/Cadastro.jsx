@@ -20,9 +20,9 @@ const Cadastro = (props) => {
                          <label htmlFor="genero"></label>
                             <select name="genero" id="">
                             <option  value="" disabled selected>Selecione</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
+                            <option value="">Evento 1</option>
+                            <option value="">Evento 2</option>
+                            <option value="">Evento 3</option>
                          </select>
                             </div>
                             <Botao nomeBotao="Cadastrar"/>

@@ -40,4 +40,33 @@ header{
     .link_header{
         margin-left: 10px;
     }
+
+    .nav_header{
+        display: none;
+    }
 }
+
+@media screen and (max-width: 894px) {
+    
+    .link_header{
+        margin-left: 10px;
+        font-size: small;
+    }
+    
+    .nav_header{
+        display: none;
+        
+    }
+    
+    
+}
+
+@media screen and (max-width: 415px){
+    
+    .cabecalho img{
+        height: 15px;
+    }
+   
+    
+}
+

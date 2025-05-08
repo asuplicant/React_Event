@@ -10,10 +10,10 @@ const Header = () => {
                     <img src={Logo1} alt="Logo do Events" />
                 </Link>
                 <nav className="nav_header">
-                    <Link to="/Home" className="link_header" >Home</Link>
-                    <Link to="/Eventos" className="link_header" >Eventos</Link>
-                    <Link to="/Usuarios" className="link_header" >Usuários</Link>
-                    <Link to="/Contatos" className="link_header" >Contatos</Link>
+                    <Link to="/TipoEventos" className="link_header" href="">Home</Link>
+                    <Link to="/CadastroEventos" className="link_header" href="">Eventos</Link>
+                    <Link to="/TipoUsuarios" className="link_header" href="">Usuários</Link>
+                    <Link to="/Contatos" className="link_header" href="">Contatos</Link>
                 </nav>
 
                 <nav className="nav_header admin">
