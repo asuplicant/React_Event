@@ -4,7 +4,7 @@ import Botao from "../botao/Botao"
 const Cadastro = (props) => {
     return(
             <section className="section_cadastro">
-                <form action="" className="layout_grid form_cadastro">
+                <form onSubmit={props.funcCadastro} action="" className="layout_grid form_cadastro">
                     <h1>{props.tituloCadastro}</h1>
                     <hr />
                     <div className="campos_cadastro">
@@ -14,7 +14,9 @@ const Cadastro = (props) => {
                         <div className="campo_preen">
                          <div className="campo_cad_nome">
                             <label htmlFor=""></label>
-                            <input type="text" nome="nome" placeholder={props.nomes}/>
+                            <input type="text" nome="nome" placeholder={props.nomes} 
+                            value={props.valorInput}
+                            onChange={(e) => props.setValorInput(e.target.value)}/>
                             </div>
                          <div className="campo_cad_genero" style={{display:props.visibilidade}}>
                          <label htmlFor="genero"></label>
