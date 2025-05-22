@@ -13,7 +13,7 @@ const Lista = (props) => {
                     <table>
                         <thead>
                             <tr className="tabela_cabecalho">
-                                <th className="left">{props.titulo}</th>
+                               <th class="left">Título</th>
                                 <th className="left" style={{ display: props.visibilidade }}>Tipo de Evento</th>
                                 <th className="right">Editar</th>
                                 <th className="right">Deletar</th>
@@ -39,7 +39,7 @@ const Lista = (props) => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="4">Nenhum tipo de evento cadastrado.</td>
+                                    <td colSpan="4">Nada cadastrado.</td>
                                 </tr>
                             )}
                         </tbody>

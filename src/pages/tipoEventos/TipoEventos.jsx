@@ -88,7 +88,6 @@ const TipoEvento = () => {
         }
     }
 
-
     // Editar Tipo Evento.
     async function editarTipoEvento(tiposEventos) {
         const { value: novoTipoEvento } = await Swal.fire({
@@ -124,13 +123,12 @@ const TipoEvento = () => {
         }
     }
 
-
     // Use Effect.
     useEffect(() => {
         listarTipoEvento();
     }, []);
 
-
+    // Retornar.
     return (
         <>
             <Header />
