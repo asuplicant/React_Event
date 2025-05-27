@@ -1,3 +1,4 @@
+
 import "./Lista.css";
 import Editar from "../../assets/img/lapis.svg";
 import Excluir from "../../assets/img/lixeira.svg";
@@ -43,7 +44,7 @@ const Lista = (props) => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="4" className="nadaCadastrado">Nada cadastrado</td>
+                                    <td colSpan="4" className="nada_cadastrado">Nada cadastrado</td>
                                 </tr>
                             )}
                         </tbody>

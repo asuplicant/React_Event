@@ -17,7 +17,7 @@ const TipoUsuarios = () => {
     const [listaTipoUsuario, setListaTipoUsuario] = useState([])
 
     // Alertar.
-    function alertar(icone, mesagem) {
+    function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -31,17 +31,17 @@ const TipoUsuarios = () => {
         });
         Toast.fire({
             icon: icone,
-            title: mesagem
+            title: mensagem
         });
     }
 
-    // Cadastrar Usuário.
+    // Cadastrar Tipo Usuário.
     async function cadastrarUsuario(e) {
         e.preventDefault();
         
         if (tipoUsuario.trim() !== "") {
             try {
-                api.post("TipoUsuario", { TituloTipoUsuario: tipoUsuario })
+                await api.post("TipoUsuario", { TituloTipoUsuario: tipoUsuario })
                 alertar("success", "Cadastro realizado com sucesso")
                 setTipoUsuario("")
             } catch (error) {
@@ -56,9 +56,9 @@ const TipoUsuarios = () => {
     // Listar Tipo Usuário.
     async function listarTipoUsuario() {
         try {
-            const resposta = await api.get("TiposUsuarios")
+            const resposta = await api.get("TipoUsuario")
+            console.log(resposta.data)
             setListaTipoUsuario(resposta.data);
-
         } catch (error) {
             console.log(error);
         }
@@ -85,6 +85,13 @@ const TipoUsuarios = () => {
             alertar("error", "Erro ao Excluir!");
         });
     }
+
+    // Use Effect.
+    useEffect(() => {
+        listarTipoUsuario();
+    }, [listaTipoUsuario])
+
+    // Editar Tipo Usuário.
     async function editarTipoUsuario(tipousuario) {
         const { value: novoUsuario } = await Swal.fire({
             title: "Modifique o tipo do usuario",
@@ -113,9 +120,8 @@ const TipoUsuarios = () => {
         }
     }
 
-    useEffect(() => {
-        listarTipoUsuario();
-    }, [listaTipoUsuario])
+
+    // Retornar.
     return (
 
 
@@ -131,10 +137,10 @@ const TipoUsuarios = () => {
                 setValorInput={setTipoUsuario}
             />
             <Lista
-                tituloLista="Lista Tipo de Evento"
+                tituloLista="LISTA TIPO DE EVENTO"
                 titulo="titulo"
                 visibilidade="none"
-                listaTipoUsuario={listaTipoUsuario}
+                listaTipoEvento={listaTipoUsuario}
                 excluirTipoUsuario={excluirTipoUsuario}
                 editarTipoUsuario={editarTipoUsuario}
             />
