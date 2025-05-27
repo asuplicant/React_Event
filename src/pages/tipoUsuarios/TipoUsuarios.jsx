@@ -38,6 +38,7 @@ const TipoUsuarios = () => {
     // Cadastrar Usuário.
     async function cadastrarUsuario(e) {
         e.preventDefault();
+        
         if (tipoUsuario.trim() !== "") {
             try {
                 api.post("TipoUsuario", { TituloTipoUsuario: tipoUsuario })

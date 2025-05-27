@@ -128,6 +128,7 @@ const TipoEvento = () => {
         listarTipoEvento();
     }, []);
 
+    
     // Retornar.
     return (
         <>
