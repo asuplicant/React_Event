@@ -38,7 +38,7 @@ const TipoUsuarios = () => {
     // Cadastrar Tipo Usuário.
     async function cadastrarUsuario(e) {
         e.preventDefault();
-        
+
         if (tipoUsuario.trim() !== "") {
             try {
                 await api.post("TipoUsuario", { TituloTipoUsuario: tipoUsuario })
@@ -77,7 +77,7 @@ const TipoUsuarios = () => {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                api.delete(`TiposUsuarios/${id.idTipoUsuario}`)
+                api.delete(`TipoUsuario/${id}`)
                 alertar("success", "Cadastro Excluido!")
             }
         }).catch(error => {
@@ -92,33 +92,32 @@ const TipoUsuarios = () => {
     }, [listaTipoUsuario])
 
     // Editar Tipo Usuário.
-    async function editarTipoUsuario(tipousuario) {
-        const { value: novoUsuario } = await Swal.fire({
-            title: "Modifique o tipo do usuario",
+   async function editarTipoUsuario(tiposUsuarios) {
+        const { value : novoTipoUsuario } = await Swal.fire({
+            title: "Modifique seu tipo de usuário", 
             input: "text",
-            inputLabel: "Novo tipo do usuario",
-            inputValue: tipoUsuario.tituloTipoUsuario,
+            confirmButtonColor: '#B51D44',
+            cancelButtonColor: '#000000',
+            inputLabel: "Novo tipo de usuário",
+            inputValue: tiposUsuarios.tituloTipoUsuario,
             showCancelButton: true,
-            confirmButtonColor: '#b51d44',
-            cancelButtonColor: '#b5b5b5',
-            resultButtonColor: '#b51d44',
-            confirmButtonText: 'Sim, modificar',
-            cancelButtonText: 'Cancelar',
             inputValidator: (value) => {
-                if (!value) {
-                    return "O campo precisa ser preenchido!";
+                if(!value) {
+                    return "O campo não pode estar vazio!"
                 }
             }
-        });
-        if (novoUsuario) {
+        })
+        if(novoTipoUsuario) {
             try {
-                api.put(`TiposUsuarios/${tipousuario.idTipoUsuario}`, { tituloTipoUsuario: novoUsuario });
-                Swal.fire(`O usuario modificado ${novoUsuario}`);
+                await api.put(`TipoUsuario/${tiposUsuarios.idTipoUsuario}`,
+                    { TituloTipoUsuario : novoTipoUsuario})
+                alertar("success", "Tipo de usuário modificado!")
             } catch (error) {
-                console.log(error);
+                
             }
+            Swal.fire(`Seu novo tipo de usuário: ${novoTipoUsuario}`)
         }
-    }
+    }   
 
 
     // Retornar.
@@ -141,8 +140,8 @@ const TipoUsuarios = () => {
                 titulo="titulo"
                 visibilidade="none"
                 listaTipoEvento={listaTipoUsuario}
+                editarTipoEvento={editarTipoUsuario}
                 excluirTipoUsuario={excluirTipoUsuario}
-                editarTipoUsuario={editarTipoUsuario}
             />
             <Footer />
         </>

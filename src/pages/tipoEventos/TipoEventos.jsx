@@ -66,13 +66,15 @@ const TipoEvento = () => {
     // Excluir Tipo Evento.
     async function excluirTipoEvento(id) {
         const result = await Swal.fire({
-            title: "Você tem certeza que quer excluir?",
-            text: "Você não vai poder reverter isso!",
+            title: "Quer mesmo excluir isso?",
+            text: "Você não vai poder reverter!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Sim, deletar isso!"
+            confirmButtonText: "Sim, quero deletar",
+            cancelButtonText: "Não"
+            
         });
 
         if (result.isConfirmed) {
@@ -147,8 +149,8 @@ const TipoEvento = () => {
                 titulo="Título"
                 visibilidade="table-cell"
                 listaTipoEvento={listaTipoEvento}
-                editarTipoEvento={editarTipoEvento}
                 excluirTipoEvento={excluirTipoEvento}
+                editarTipoEvento={editarTipoEvento}
             />
             <Footer />
         </>
