@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import { useEffect, useState } from "react";
@@ -140,8 +141,8 @@ const TipoUsuarios = () => {
                 titulo="titulo"
                 visibilidade="none"
                 listaTipoEvento={listaTipoUsuario}
-                editarTipoEvento={editarTipoUsuario}
-                excluirTipoUsuario={excluirTipoUsuario}
+                 editarTipoUsuario={editarTipoUsuario}
+   excluirTipoUsuario={excluirTipoUsuario}
             />
             <Footer />
         </>
