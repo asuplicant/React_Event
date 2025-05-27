@@ -137,8 +137,8 @@ const TipoUsuarios = () => {
                 setValorInput={setTipoUsuario}
             />
             <Lista
-                tituloLista="LISTA TIPO DE EVENTO"
-                titulo="titulo"
+                tituloLista="LISTA TIPO DE USUÁRIO"
+                titulo="Titulo"
                 visibilidade="none"
                 listaTipoEvento={listaTipoUsuario}
                  editarTipoUsuario={editarTipoUsuario}

@@ -145,7 +145,7 @@ const TipoEvento = () => {
                 setValorInput={setTiposEventos}
             />
             <Lista
-                tituloLista="Lista Tipo de Evento"
+                tituloLista="LISTA TIPO DE EVENTOS"
                 titulo="Título"
                 visibilidade="table-cell"
                 listaTipoEvento={listaTipoEvento}
