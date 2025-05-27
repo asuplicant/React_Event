@@ -35,7 +35,7 @@ const Lista = (props) => {
                                         <img
                                             src={Excluir}
                                             alt="Lixeira"
-                                            onClick={() => props.excluirTipoEvento(item.idTipoEvento)}
+                                            onClick={() => props.excluirTipoEvento(item)}
                                             style={{ cursor: "pointer" }}
                                         />
                                     </td>

@@ -78,7 +78,7 @@ const TipoUsuarios = () => {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                api.delete(`TipoUsuario/${id}`)
+                api.delete(`TipoUsuario/${id.idTipoUsuario}`)
                 alertar("success", "Cadastro Excluido!")
             }
         }).catch(error => {
@@ -93,9 +93,9 @@ const TipoUsuarios = () => {
     }, [listaTipoUsuario])
 
     // Editar Tipo Usuário.
-   async function editarTipoUsuario(tiposUsuarios) {
-        const { value : novoTipoUsuario } = await Swal.fire({
-            title: "Modifique seu tipo de usuário", 
+    async function editarTipoUsuario(tiposUsuarios) {
+        const { value: novoTipoUsuario } = await Swal.fire({
+            title: "Modifique seu tipo de usuário",
             input: "text",
             confirmButtonColor: '#B51D44',
             cancelButtonColor: '#000000',
@@ -103,22 +103,22 @@ const TipoUsuarios = () => {
             inputValue: tiposUsuarios.tituloTipoUsuario,
             showCancelButton: true,
             inputValidator: (value) => {
-                if(!value) {
+                if (!value) {
                     return "O campo não pode estar vazio!"
                 }
             }
         })
-        if(novoTipoUsuario) {
+        if (novoTipoUsuario) {
             try {
                 await api.put(`TipoUsuario/${tiposUsuarios.idTipoUsuario}`,
-                    { TituloTipoUsuario : novoTipoUsuario})
+                    { TituloTipoUsuario: novoTipoUsuario })
                 alertar("success", "Tipo de usuário modificado!")
             } catch (error) {
-                
+
             }
             Swal.fire(`Seu novo tipo de usuário: ${novoTipoUsuario}`)
         }
-    }   
+    }
 
 
     // Retornar.
@@ -141,8 +141,8 @@ const TipoUsuarios = () => {
                 titulo="Titulo"
                 visibilidade="none"
                 listaTipoEvento={listaTipoUsuario}
-                 editarTipoUsuario={editarTipoUsuario}
-   excluirTipoUsuario={excluirTipoUsuario}
+                editarTipoEvento={editarTipoUsuario}
+                excluirTipoEvento={excluirTipoUsuario}
             />
             <Footer />
         </>

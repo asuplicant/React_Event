@@ -16,6 +16,7 @@ const TipoEvento = () => {
     const [tiposEventos, setTiposEventos] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([]);
 
+    // Alertar.
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
             toast: true,
@@ -80,7 +81,7 @@ const TipoEvento = () => {
         if (result.isConfirmed) {
             try {
                 console.log("ID enviado para deletar:", id);
-                await api.delete(`TipoEvento/${id}`);
+                await api.delete(`TipoEvento/${id.idTipoEvento}`);
                 alertar("success", "Deletado com sucesso!");
                 listarTipoEvento();
             } catch (error) {
