@@ -22,7 +22,7 @@ const Lista = (props) => {
                         {props.listaTipoEvento && props.listaTipoEvento.length > 0 ? (
                             props.listaTipoEvento.map((item) => (
                                 <tr className="item_lista" key={item.idTipoEvento}>
-                                    <td data-cell="Nome" className="left">{item.tituloTipoEvento}</td>
+                                    <td data-cell="Nome" className="left">{item.tituloTipoUsuario} {item.tituloTipoEvento}</td>
                                     <td data-cell="Editar" className="botao_edicao right">
                                         <img
                                             src={Editar}

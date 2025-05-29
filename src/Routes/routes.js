@@ -3,7 +3,7 @@ import Login from "../pages/login/Login"
 import TipoUsuarios from "../pages/tipoUsuarios/TipoUsuarios";
 import CadastroEventos from "../pages/cadastroEventos/CadastroEventos";
 import TipoEventos from "../pages/tipoEventos/TipoEventos";
-import Lista from "../components/lista/Lista";
+import Listagem from "../pages/listagem/Listagem";
 
 const Rotas = () => {
     return (
@@ -13,7 +13,7 @@ const Rotas = () => {
                 <Route path="/CadastroEventos" element={<CadastroEventos />} />
                 <Route path="/TipoUsuarios" element={<TipoUsuarios />} />
                 <Route path="/TipoEventos" element={<TipoEventos />} />
-                <Route path="/Lista" element={<Lista />} />
+                <Route path="/ListagemDeEventos" element={<Listagem />} />
             </Routes>
         </BrowserRouter>
     )
