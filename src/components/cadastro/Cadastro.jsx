@@ -80,7 +80,7 @@ const Cadastro = (props) => {
                         {/* ---------------------------------------------------------------------- */}
 
                         {/* Descrição */}
-                        <div className="campo_cad_nome">
+                        <div className="campo_cad_nome" style={{ display: props.visibilidade }}>
                            
                             <input
                                 type="text"

@@ -13,8 +13,11 @@ const Lista = (props) => {
                     <thead>
                         <tr className="tabela_cabecalho">
                             <th className="left">{props.titulo}</th>
+                            <th style={{ display: props.visibilidade }}>Data do Evento</th>
+                            <th style={{ display: props.visibilidade }}>Tipo Evento</th>
                             <th className="right">Editar</th>
                             <th className="right">Deletar</th>
+                            <th style={{ display: props.visibilidade }}>Descrição</th>
                         </tr>
                     </thead>
 
@@ -25,12 +28,16 @@ const Lista = (props) => {
                                     <td data-cell="Nome" className="left">{item.tituloTipoUsuario} {item.tituloTipoEvento}</td>
                                     <td data-cell="Editar" className="botao_edicao right">
                                         <img
+
+                                            // Editar.
                                             src={Editar}
                                             alt="Caneta"
                                             onClick={() => props.editarTipoEvento(item)}
                                             style={{ cursor: "pointer" }}
                                         />
                                     </td>
+
+                                    {/* Excluir */}
                                     <td data-cell="Excluir" className="right">
                                         <img
                                             src={Excluir}

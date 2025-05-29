@@ -148,10 +148,11 @@ const TipoEvento = () => {
             <Lista
                 tituloLista="LISTA TIPO DE EVENTOS"
                 titulo="Título"
-                visibilidade="table-cell"
+                visibilidade="none"
                 listaTipoEvento={listaTipoEvento}
                 excluirTipoEvento={excluirTipoEvento}
                 editarTipoEvento={editarTipoEvento}
+
             />
             <Footer />
         </>

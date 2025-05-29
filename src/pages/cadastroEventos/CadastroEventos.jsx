@@ -16,7 +16,7 @@ const CadastroEventos = () => {
     const [listaTipoEvento, setListaTipoEvento] = useState([])
     const [dataevento, setDataEvento] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [instituicao, setInstituicao] = useState("B4F736FD-96F5-48EE-86F5-9B9AA85D716A");
+    const [instituicao, setInstituicao] = useState("8C74EEE5-0E10-4586-8B3E-1BA334FEFEDF");
 
     // Alertar.
     function alertar(icone, mensagem) {
@@ -65,10 +65,10 @@ const CadastroEventos = () => {
         evt.preventDefault();
         if (evento.trim() !== "") {
             try {
-                await api.post("Eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
-                alertar("success", "Cadastro realizado com sucesso!");
+                await api.post("eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
+                alertar("success", "Deu certo");
                 setEvento("");
-                setDataEvento();
+                setDataEvento("");
                 setDescricao("");
                 setTipoEvento("");
 
@@ -122,6 +122,7 @@ const CadastroEventos = () => {
                 titulo="Nome"
                 lista={listaEvento}
                 tipoLista="cadastroEvento"
+            // excluir={excluirEvento}
             />
             <Footer />
         </>
