@@ -44,23 +44,17 @@ const Cadastro = (props) => {
 
                         {/* Tipos Eventos */}
                         <div className="campo_cad_genero" style={{ display: props.visibilidade }}>
-                            <label htmlFor="TiposEventos"></label>
                             <select
                                 name="TiposEventos"
-                                id="TiposEventos"
                                 value={props.valorSelect}
-                                onChange={(e) => props.setValorSelect(e.target.value)} >
-                                <option value="" disabled selected>
-                                    Tipo Evento
-                                </option>
-
-                                {props.lista && props.lista.length > 0 &&
-                                    props.lista.map((item) => (
-                                        <option key={item.idTipoEvento} value={item.idTipoEvento}>
-                                            {item.tituloTipoEvento}
-                                        </option>
-                                    ))
-                                }
+                                onChange={(e) => props.setValorSelect(e.target.value)}
+                            >
+                                <option value="" disabled>Tipo Evento</option>
+                                {props.lista &&
+                                    props.lista.length > 0 &&
+                                    props.lista.map((item) => 
+                                        <option value={item.idTipoEvento}>{item.tituloTipoEvento}</option>
+                                    )}
                             </select>
                         </div>
 
@@ -81,7 +75,7 @@ const Cadastro = (props) => {
 
                         {/* Descrição */}
                         <div className="campo_cad_nome" style={{ display: props.visibilidade }}>
-                           
+
                             <input
                                 type="text"
                                 name="descricao"
