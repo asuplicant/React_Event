@@ -4,6 +4,8 @@ import Comentario from "../../assets/img/coment.svg";
 import Descricao from "../../assets/img/descricao.svg";
 import Toggle from "../../components/toggle/Toggle";
 
+import Swal from "sweetalert2";
+
 // Importação do UseEffect e do UseState.
 import { useEffect, useState } from "react";
 
@@ -31,14 +33,21 @@ const Listagem = () => {
             const resposta = await api.get("Eventos");
             const todosOsEventos = resposta.data;
 
-            const respostaPresenca = await api.get("Presenca/ListarMinhasPresencas/"+usuarioId)
+            const respostaPresenca = await api.get(`Presenca/ListarMinhasPresencas/${usuarioId}`)
             const minhasPresencas = respostaPresenca.data;
 
-            const eventosComPresencas = todosOsEventos.map(() => {
+            const eventosComPresencas = todosOsEventos.map((atualEvento) => {
+                const presenca = minhasPresencas.find(p => p.idEvento === atualEvento.idEvento);
 
+                return {
+                    // As informações tanto de EVENTOS quanto de EVENTOS que possuem PRESENÇA.
+                    ...atualEvento,
+                    possuiPresenca: presenca?.situacao === true,
+                    idPresenca: presenca?.idPresenca || null
+                }
             })
 
-            setListaEventos(resposta.data);
+            setListaEventos(eventosComPresencas);
         } catch (error) {
             console.log(error);
         }
@@ -57,10 +66,31 @@ const Listagem = () => {
         setTipoModal(tipo)
     }
 
+    // Função Fechar Modal.
     function fecharModal() {
         setModalAberto(false)
         setDadosModal([])
         setTipoModal("")
+    }
+
+    async function manipularPresenca(idEvento, presenca, idPresenca) {
+        try {
+            if (presenca && idPresenca !== "") {
+                await api.put(`PresencasEventos/${idPresenca}`, {situacao: false})
+                // Atualização da situação para FALSE.
+            } else if (idPresenca !== "") {
+                // Atualização da situação para TRUE.
+                await api.put(`PresencasEventos/${idPresenca}`, {situacao: true})
+                Swal.fire(`Confirmado!`, `Sua presença foi confirmada.`, `success`);
+            } else {
+                // Cadastrar uma NOVA situação.
+                await api.post(`PresencasEventos/${idPresenca}`, {situacao: true, idUsuario: usuarioId, idEvento: idEvento});
+                Swal.fire(`Confirmado!`, `Sua presença foi confirmada.`, `success`);
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 
     // Retornar.
@@ -113,7 +143,9 @@ const Listagem = () => {
                                     </td>
                                     <td
                                         data-cell="Participar">
-                                        <Toggle />
+                                        <Toggle manipular={() => (item.idEvento, item.possuiPresenca, item.idPresenca)}
+                                            presenca={item.possuiPresenca}
+                                        />
                                     </td>
                                 </tr>
                             ))
