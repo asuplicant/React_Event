@@ -1,9 +1,11 @@
 import api from "../../Services/services";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Deletar from "../../assets/img/deletar.svg";
 
 const Modal = (props) => {
     const [comentarios, setComentarios] = useState([]);
+
+    // Listar Comentário.
     async function listarComentarios() {
         try {
             const resposta = await api.get(`Comentario/ListarSomenteExibe?id=${props.idEvento}`)
@@ -12,6 +14,20 @@ const Modal = (props) => {
             console.log(error);
         }
     }
+
+    // Cadastrar Comentário.
+    async function cadastrarComentario(){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+    
+    // Use Effect.
+    useEffect(() => {
+        listarComentarios();
+    }, [])
 
     // Retornar.
     return (

@@ -17,7 +17,7 @@ const Lista = (props) => {
                             <th style={{ display: props.visibilidade }}>Tipo Evento</th>
                             <th className="right">Editar</th>
                             <th className="right">Deletar</th>
-                            <th style={{ display: props.visibilidade }}>Descrição</th>
+                            <th className="descricao"style={{ display: props.visibilidade }}>Descrição</th>
                         </tr>
                     </thead>
 

@@ -124,7 +124,6 @@ const TipoUsuarios = () => {
     // Retornar.
     return (
 
-
         <>
             <Header />
             <Cadastro

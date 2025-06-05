@@ -4,8 +4,12 @@ import Comentario from "../../assets/img/coment.svg";
 import Descricao from "../../assets/img/descricao.svg";
 import Toggle from "../../components/toggle/Toggle";
 
+// Importação do UseEffect e do UseState.
 import { useEffect, useState } from "react";
+
+// Importação da API.
 import api from "../../Services/services";
+
 import { format } from "date-fns";
 
 import "./Listagem.css";
@@ -18,11 +22,22 @@ const Listagem = () => {
     const [dadosModal, setDadosModal] = useState({});
     //descricao, idEvento, etc.
     const [modalAberto, setModalAberto] = useState(false);
+    const [usuarioId, setUsuarioId] = useState("1B5DF540-B942-4D6B-6729-08DDA4410779");
 
     // Listar Eventos.
     async function listarEventos() {
         try {
+            // Pego os eventos em geral.
             const resposta = await api.get("Eventos");
+            const todosOsEventos = resposta.data;
+
+            const respostaPresenca = await api.get("Presenca/ListarMinhasPresencas/"+usuarioId)
+            const minhasPresencas = respostaPresenca.data;
+
+            const eventosComPresencas = todosOsEventos.map(() => {
+
+            })
+
             setListaEventos(resposta.data);
         } catch (error) {
             console.log(error);
@@ -38,8 +53,14 @@ const Listagem = () => {
     function abrirModal(tipo, dados) {
         // Tipo de Modal & Dados.
         setModalAberto(true)
-        setTipoModal(tipo)
         setDadosModal(dados)
+        setTipoModal(tipo)
+    }
+
+    function fecharModal() {
+        setModalAberto(false)
+        setDadosModal([])
+        setTipoModal("")
     }
 
     // Retornar.
@@ -110,7 +131,17 @@ const Listagem = () => {
             {/* Modal Aberto*/}
             {modalAberto && (
                 <Modal
-                    titulo={tipoModel == "descricaoEvento" ? "Descrição do evento" : "Comentário"}
+                    titulo={tipoModal === "descricaoEvento" ? "Descrição do evento" : "Comentário"}
+
+                    // Estou verificando qual é o tipo de Modal.
+                    tipoModel={tipoModal}
+
+                    idEvento={dadosModal.idEvento}
+
+                    descricao={dadosModal.descricao}
+
+                    fecharModal={fecharModal}
+
                 />
             )}
         </>

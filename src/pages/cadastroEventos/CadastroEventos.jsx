@@ -16,9 +16,10 @@ const CadastroEventos = () => {
     const [listaTipoEvento, setListaTipoEvento] = useState([]);
     const [dataevento, setDataEvento] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [instituicao, setInstituicao] = useState("8C74EEE5-0E10-4586-8B3E-1BA334FEFEDF");
+    const [instituicao, setInstituicao] = useState("");
+    const [listaInstituicao, setListaInstituicao] = useState([]);
 
-    // Alertar.
+    // Alertar
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
             toast: true,
@@ -37,7 +38,7 @@ const CadastroEventos = () => {
         });
     }
 
-    // Listar Tipo de Evento.
+    // Listar Tipo Evento.
     async function listarTipoEvento() {
         try {
             const resposta = await api.get("TiposEventos");
@@ -57,33 +58,54 @@ const CadastroEventos = () => {
         }
     }
 
-    // Cadastrar Evento.
-    async function cadastrarEvento(evt) {
-        evt.preventDefault();
-        if (evento.trim() !== "") {
-            try {
-                await api.post("Eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
-                alertar("success", "Cadastro realizado com sucesso!");
-                setEvento("");
-                setDataEvento();
-                setDescricao("");
-                setTipoEvento("");
-
-
-            } catch (error) {
-                alertar("error", "Entre em contato com o suporte")
-            }
-        } else {
-            alertar("error", "Preencha o campo vazio")
-
+    // Listar Instituições.
+    async function listarInstituicoes() {
+        try {
+            const resposta = await api.get("Instituicoes");
+            setListaInstituicao(resposta.data);
+        } catch (error) {
+            console.log(error);
         }
     }
 
+    // Cadastrar
+    async function cadastrarEvento(evt) {
+        evt.preventDefault();
 
-    // Use Effect.
+        if (evento.trim() && tipoevento && dataevento && descricao && instituicao) {
+            try {
+                await api.post("Evento", {
+                    nomeEvento: evento,
+                    idTipoEvento: tipoevento,
+                    dataEvento: dataevento,
+                    descricao: descricao,
+                    idInstituicao: instituicao,
+                });
+
+                alertar("success", "Cadastro realizado com sucesso!");
+
+                setEvento("");
+                setDataEvento("");
+                setDescricao("");
+                setTipoEvento("");
+                setInstituicao("");
+
+                listarEvento();
+
+            } catch (error) {
+                alertar("error", "Erro ao cadastrar. Contate o suporte.");
+                console.log(error);
+            }
+        } else {
+            alertar("error", "Preencha todos os campos obrigatórios.");
+        }
+    }
+
+    // USe Effect.
     useEffect(() => {
         listarEvento();
         listarTipoEvento();
+        listarInstituicoes();
     }, []);
 
     return (
@@ -105,6 +127,7 @@ const CadastroEventos = () => {
                 valorText={descricao}
                 setValorText={setDescricao}
                 lista={listaTipoEvento}
+                listaInstituicoes={listaInstituicao}
             />
             <Lista
                 tituloLista="LISTA DE EVENTOS"
