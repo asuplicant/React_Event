@@ -101,7 +101,7 @@ const CadastroEventos = () => {
         }
     }
 
-    // USe Effect.
+    // Use Effect.
     useEffect(() => {
         listarEvento();
         listarTipoEvento();

@@ -4,6 +4,8 @@ import Deletar from "../../assets/img/deletar.svg";
 
 const Modal = (props) => {
     const [comentarios, setComentarios] = useState([]);
+    const [novoComentario, setNovoComentario] = useState("");
+    const [usuarioId, setUsuarioId] = useState("1B5DF540-B942-4D6B-6729-08DDA4410779");
 
     // Listar Comentário.
     async function listarComentarios() {
@@ -16,14 +18,27 @@ const Modal = (props) => {
     }
 
     // Cadastrar Comentário.
-    async function cadastrarComentario(){
+    async function cadastrarComentario() {
         try {
-            
+            await api.post("ComentariosEventos", {
+                idUsuario: usuarioId,
+                idEvento: props.idEvento,
+                descricao: comentarios})
         } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // Deletar Excluir.
+    async function deletarComentario(){
+        try {
+            await api.delete(`ComentariosEventos/${idComentario}`);
+        } catch (error) {
+            console.log(error);
             
         }
     }
-    
+
     // Use Effect.
     useEffect(() => {
         listarComentarios();
@@ -51,8 +66,10 @@ const Modal = (props) => {
                             <div>
                                 <input
                                     type="text"
-                                    placeholder="Escreva seu comentário" />
-                                <button>
+                                    placeholder="Escreva seu comentário"
+                                    value={novoComentario}
+                                    onChange={(e) => setNovoComentario(e.target.value)} />
+                                <button onClick={() => cadastrarComentario(novoComentario)}>
                                     Cadastrar
                                 </button>
                             </div>

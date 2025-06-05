@@ -19,11 +19,17 @@ import Modal from "../../components/modal/Modal";
 
 const Listagem = () => {
     const [listaEventos, setListaEventos] = useState([]);
+
+    // Modal:
     const [tipoModal, setTipoModal] = useState("");
     //descricaoEvento ou comentario.
     const [dadosModal, setDadosModal] = useState({});
     //descricao, idEvento, etc.
     const [modalAberto, setModalAberto] = useState(false);
+
+    // Filtro:
+    const [filtroData, setFiltroData] = useState(["todos"]);
+
     const [usuarioId, setUsuarioId] = useState("1B5DF540-B942-4D6B-6729-08DDA4410779");
 
     // Listar Eventos.
@@ -58,6 +64,7 @@ const Listagem = () => {
         listarEventos();
     }, []);
 
+
     // Abrir Modal.
     function abrirModal(tipo, dados) {
         // Tipo de Modal & Dados.
@@ -73,38 +80,58 @@ const Listagem = () => {
         setTipoModal("")
     }
 
+    // Manipular Presença.
     async function manipularPresenca(idEvento, presenca, idPresenca) {
         try {
             if (presenca && idPresenca !== "") {
-                await api.put(`PresencasEventos/${idPresenca}`, {situacao: false})
+                await api.put(`PresencasEventos/${idPresenca}`, { situacao: false })
                 // Atualização da situação para FALSE.
             } else if (idPresenca !== "") {
                 // Atualização da situação para TRUE.
-                await api.put(`PresencasEventos/${idPresenca}`, {situacao: true})
+                await api.put(`PresencasEventos/${idPresenca}`, { situacao: true })
                 Swal.fire(`Confirmado!`, `Sua presença foi confirmada.`, `success`);
             } else {
                 // Cadastrar uma NOVA situação.
-                await api.post(`PresencasEventos/${idPresenca}`, {situacao: true, idUsuario: usuarioId, idEvento: idEvento});
+                await api.post(`PresencasEventos/${idPresenca}`, { situacao: true, idUsuario: usuarioId, idEvento: idEvento });
                 Swal.fire(`Confirmado!`, `Sua presença foi confirmada.`, `success`);
             }
+
+            listarEventos()
+
         } catch (error) {
             console.log(error);
 
         }
     }
 
+    function filtrarEventos(evento) {
+        const hoje = new Date();
+
+        const dataEvento = new Date(evento.dataEvento);
+
+        if (filtroData.includes("todos")) return true;
+        if (filtroData.includes("futuros") && dataEvento > hoje) return true;
+        if (filtroData.includes("passados") && dataEvento < hoje) return true;
+
+        return false;
+    }
+
+
     // Retornar.
     return (
         <>
             <Header />
+
             <main className="main_lista_eventos layout_grid">
                 <div className="titulo">
                     <h1>Eventos</h1>
                     <hr />
                 </div>
 
-                <select defaultValue="">
-                    <option value="">Todos os eventos</option>
+                <select onChange={(e) => setFiltroData([e.target.value])} >
+                    <option value="todos">Todos os eventos</option>
+                    <option value="futuros">Somente futuros</option>
+                    <option value="passados">Somente passados</option>
                 </select>
 
                 <table className="tabela_lista_eventos">
@@ -122,7 +149,7 @@ const Listagem = () => {
                         {listaEventos.length > 0 ? (
                             listaEventos.map((item) => (
                                 <tr>
-                                    <td>{item.titulo}</td>
+                                    <td>{item.nomeEvento}</td>
                                     <td>{format(item.dataEvento, "dd/MM/yy")}</td>
                                     <td>{item.tipoEvento.titulo}</td>
                                     <td
