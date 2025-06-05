@@ -5,9 +5,9 @@ const Toggle = () => {
     return (
         <>
             <div className="teste">
-                <label  className="switch">
-                    <input  type="checkbox" />
-                        <span className="slider round"></span>
+                <label className="switch">
+                    <input type="checkbox" />
+                    <span className="slider round"></span>
                 </label>
             </div>
         </>

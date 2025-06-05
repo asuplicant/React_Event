@@ -58,45 +58,24 @@ const CadastroEventos = () => {
     }
 
     // Cadastrar Evento.
-    async function cadastrarEvento(e) {
-        e.preventDefault();
-
-        const dataFormatada = dataevento.split('/').reverse().join('-');
-
+    async function cadastrarEvento(evt) {
+        evt.preventDefault();
         if (evento.trim() !== "") {
             try {
-                await api.post("eventos", {
-                    DataEvento: dataFormatada,
-                    NomeEvento: evento,
-                    Descricao: descricao,
-                    IdTipoEvento: tipoevento,
-                    IdInstituicao: instituicao
-                });
-
-                alertar("success", "Cadastro realizado com sucesso");
-
+                await api.post("Eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
+                alertar("success", "Cadastro realizado com sucesso!");
                 setEvento("");
-                setDataEvento("");
+                setDataEvento();
                 setDescricao("");
                 setTipoEvento("");
-                setInstituicao("");
 
-                listarEvento(); // Atualiza a lista
 
             } catch (error) {
-                alertar("error", "Erro! Entre em contato com o suporte!");
-                console.log(error.response ? error.response.data : error.message);
-
-                console.log({
-                    DataEvento: dataFormatada,
-                    NomeEvento: evento,
-                    Descricao: descricao,
-                    IdTipoEvento: tipoevento,
-                    IdInstituicao: instituicao
-                });
+                alertar("error", "Entre em contato com o suporte")
             }
         } else {
-            alertar("warning", "Preencha o campo!");
+            alertar("error", "Preencha o campo vazio")
+
         }
     }
 
