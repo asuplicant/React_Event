@@ -13,7 +13,13 @@ import Modal from "../../components/modal/Modal";
 
 const Listagem = () => {
     const [listaEventos, setListaEventos] = useState([]);
+    const [tipoModal, setTipoModal] = useState("");
+    //descricaoEvento ou comentario.
+    const [dadosModal, setDadosModal] = useState({});
+    //descricao, idEvento, etc.
+    const [modalAberto, setModalAberto] = useState(false);
 
+    // Listar Eventos.
     async function listarEventos() {
         try {
             const resposta = await api.get("Eventos");
@@ -23,10 +29,20 @@ const Listagem = () => {
         }
     }
 
+    // Use Effect.
     useEffect(() => {
         listarEventos();
     }, []);
 
+    // Abrir Modal.
+    function abrirModal(tipo, dados) {
+        // Tipo de Modal & Dados.
+        setModalAberto(true)
+        setTipoModal(tipo)
+        setDadosModal(dados)
+    }
+
+    // Retornar.
     return (
         <>
             <Header />
@@ -56,15 +72,26 @@ const Listagem = () => {
                             listaEventos.map((item) => (
                                 <tr>
                                     <td>{item.titulo}</td>
-                                    <td>{format (item.dataEvento, "dd/MM/yy")}</td>
+                                    <td>{format(item.dataEvento, "dd/MM/yy")}</td>
                                     <td>{item.tipoEvento.titulo}</td>
-                                    <td data-cell="Descrição">
-                                        <img src={Descricao} alt="Descrição" />
+                                    <td
+                                        data-cell="Descrição">
+                                        <img src={Descricao}
+                                            alt="Balão de descrição"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => abrirModal("descricaoEvento", { descricao: item.descricao })}
+                                        />
                                     </td>
-                                    <td data-cell="Comentário">
-                                        <img src={Comentario} alt="Comentário" />
+                                    <td
+                                        data-cell="Comentário">
+                                        <img src={Comentario}
+                                            alt="Comentário"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => abrirModal("comentarios", { idEvento: item.idEvento })}
+                                        />
                                     </td>
-                                    <td data-cell="Participar">
+                                    <td
+                                        data-cell="Participar">
                                         <Toggle />
                                     </td>
                                 </tr>
@@ -79,8 +106,13 @@ const Listagem = () => {
             </main>
 
             <Footer />
-            
-            <Modal />
+
+            {/* Modal Aberto*/}
+            {modalAberto && (
+                <Modal
+                    titulo={tipoModel == "descricaoEvento" ? "Descrição do evento" : "Comentário"}
+                />
+            )}
         </>
     );
 };
