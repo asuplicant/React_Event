@@ -6,6 +6,8 @@ import "./Login.css";
 //importar o Sweet Alert:
 import Swal from 'sweetalert2';
 
+import { useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 import { useState } from "react";
 import api from "../../Services/services";
 
@@ -14,6 +16,7 @@ import { userDecodeToken } from "../../auth/Auth.js";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const navigate = useNavigate();
 
     // Realizar/Postar Autenticação.
     async function realizarAutenticacao(e) {
@@ -31,14 +34,26 @@ const Login = () => {
                 const token = resposta.data.token;
 
                 if (token) {
+                    // O Token será decodificado.
                     const tokenDecodificado = userDecodeToken(token);
 
-                    console.log("Token decodificado: ");
-                    console.log(tokenDecodificado);
+                    // console.log("Token decodificado: ");
+                    // console.log(tokenDecodificado.tipoUsuario);
+
+                    secureLocalStorage.setItem("tokenLogin", JSON.stringify(tokenDecodificado))
+
+                    if (tokenDecodificado.tipoUsuario === "ADM") {
+                        // Redirecionar a tela de Aluno (Tela em branco).
+                        navigate("/EventoAluno")
+                    } else {
+                        // Se não, ele vai me redirecionar para a tela de Cadastro de Eventos (Tela Vermelha)
+                        navigate("/CadastroEventos")
+                    }
                 }
 
             } catch (error) {
                 console.log(error);
+                alert("E-mail ou senha inválidos! Para dúvidas, entre em contato com o suporte.")
             }
         } else {
             // Alerta.
