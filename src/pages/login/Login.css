@@ -1,4 +1,4 @@
-.main{
+.main_login{
     display: flex;
     height: 100vh;
 }
@@ -6,7 +6,7 @@
 .banner{
   flex: 1;
   display: flex;
-  background-color: #CC3F55;
+  background-color: #b51d44;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -43,18 +43,18 @@
     padding-top: 50px;
 }
 .mudar_senha {
-    color: gray;
+    color: #9f9f9f;
     font-size: 13px;
     padding-bottom: 30px;
     padding-top: 15px;
 }
 
-.form_login {
+.formularioLogin {
     width: 100%;
     
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     place-items: center;
 }
 

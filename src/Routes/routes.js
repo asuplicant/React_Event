@@ -3,18 +3,18 @@ import Login from "../pages/login/Login"
 import TipoUsuarios from "../pages/tipoUsuarios/TipoUsuarios";
 import CadastroEventos from "../pages/cadastroEventos/CadastroEventos";
 import TipoEventos from "../pages/tipoEventos/TipoEventos";
-import Listagem from "../pages/listagem/Listagem";
+import EventoAluno from "../pages/eventoAluno/EventoAluno";
 import Home from "../pages/home/Home";
 
 const Rotas = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} exact />
+                <Route path="/Login" element={<Login />} exact />
                 <Route path="/CadastroEventos" element={<CadastroEventos />} />
                 <Route path="/TipoUsuarios" element={<TipoUsuarios />} />
                 <Route path="/TiposEventos" element={<TipoEventos />} />
-                <Route path="/ListagemDeEventos" element={<Listagem />} />
+                <Route path="/EventoAluno" element={<EventoAluno />} />
                 <Route path="/Home" element={<Home />} exact />
             </Routes>
         </BrowserRouter>
